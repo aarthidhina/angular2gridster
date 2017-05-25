@@ -1,16 +1,12 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {EventEmitter, Injectable} from '@angular/core';
 import 'rxjs/add/operator/filter';
 
 
-import { GridList } from './gridList/gridList';
-import { GridsterItemComponent } from './gridster-item/gridster-item.component';
-import { IGridsterOptions } from './IGridsterOptions';
-import { IGridsterDraggableOptions } from './IGridsterDraggableOptions';
-import { GridsterPrototypeService } from './gridster-prototype/gridster-prototype.service';
-import { GridsterItemPrototypeDirective } from './gridster-prototype/gridster-item-prototype.directive';
-import { GridListItem } from './gridList/GridListItem';
-import { GridsterComponent } from './gridster.component';
+import {GridList} from './gridList/gridList';
+import {IGridsterOptions} from './IGridsterOptions';
+import {IGridsterDraggableOptions} from './IGridsterDraggableOptions';
+import {GridListItem} from './gridList/GridListItem';
+import {GridsterComponent} from './gridster.component';
 
 @Injectable()
 export class GridsterService {
@@ -64,7 +60,8 @@ export class GridsterService {
 
     private gridsterComponent: GridsterComponent;
 
-    constructor() {}
+    constructor() {
+    }
 
     isInitialized(): boolean {
         return !!this.$element;
@@ -83,7 +80,7 @@ export class GridsterService {
     init (options: IGridsterOptions = {}, draggableOptions: IGridsterDraggableOptions = {}, gridsterComponent: GridsterComponent) {
 
         this.gridsterComponent = gridsterComponent;
-        this.options = (<any>Object).assign({}, this.defaults, options);
+        this.options = (<any>Object).assign({}, this.defaults, options, options.responsiveOptions[0]);
         this.draggableOptions = (<any>Object).assign(
             {}, this.draggableDefaults, draggableOptions);
     }
@@ -112,6 +109,7 @@ export class GridsterService {
     }
 
     reflow () {
+        this.responsiveLaneChanger();
         this.calculateCellSize();
         this.render();
     }
@@ -465,7 +463,7 @@ export class GridsterService {
             return true;
         }
         return (newSize[0] !== this.previousDragSize[0] ||
-            newSize[1] !== this.previousDragSize[1]);
+        newSize[1] !== this.previousDragSize[1]);
     }
 
     private dragPositionChanged (newPosition): boolean {
@@ -536,4 +534,30 @@ export class GridsterService {
         this.$positionHighlight.style.display = 'none';
     }
 
+    /**
+     * Changes the number of lanes to the one specified in responsive options.
+     * It only works when direction is vertical.
+     */
+    private responsiveLaneChanger() {
+
+        if (this.options.direction === 'vertical') {
+            for (var responsiveOptions of this.options.responsiveOptions) {
+                if (Math.floor(parseFloat(window.getComputedStyle(this.$element).width)) > responsiveOptions.minWindowWidth) {
+                    this.options = (<any>Object).assign({}, this.defaults, this.options, this.options.responsiveOptions[0] , responsiveOptions);
+                }
+            }
+        }
+        else {
+            this.options = (<any>Object).assign({}, this.defaults, this.options, this.options.responsiveOptions[0]);
+        }
+
+        for(var item of this.gridList.items){
+            if(this.options.dragAndDrop)
+                item.itemComponent.enableDragDrop();
+            else
+                item.itemComponent.disableDraggable();
+        }
+
+        this.gridList.resizeGrid(this.options.lanes, this.options.mainView);
+    }
 }

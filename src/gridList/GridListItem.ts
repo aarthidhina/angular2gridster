@@ -6,6 +6,35 @@ export class GridListItem {
     itemPrototype: GridsterItemPrototypeDirective;
     itemObject: Object;
 
+
+    get originalX () {
+        return this.getItem().originalX;
+    }
+    set originalX (value: number) {
+        this.getItem().originalX = value;
+    }
+
+    get originalY () {
+        return this.getItem().originalY;
+    }
+    set originalY (value: number) {
+        this.getItem().originalY = value;
+    }
+
+    get originalH () {
+        return this.getItem().originalH;
+    }
+    set originalH (value: number) {
+        this.getItem().originalH = value;
+    }
+
+    get originalW () {
+        return this.getItem().originalW;
+    }
+    set originalW (value: number) {
+        this.getItem().originalW = value;
+    }
+
     get $element () {
         return this.getItem().$element;
     }
@@ -101,5 +130,12 @@ export class GridListItem {
             throw new Error('GridListItem is not set.');
         }
         return item;
+    }
+
+    public saveOriginalProperties(){
+        this.originalX = this.x;
+        this.originalY = this.y;
+        this.originalH = this.h;
+        this.originalW = this.w;
     }
 }

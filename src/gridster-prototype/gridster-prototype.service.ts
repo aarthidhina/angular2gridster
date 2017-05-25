@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/takeUntil';
@@ -8,9 +8,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/filter';
 
-import { GridsterService } from '../gridster.service';
+import {GridsterService} from '../gridster.service';
 import {GridsterItemPrototypeDirective} from './gridster-item-prototype.directive';
-import {GridListItem} from '../gridList/GridListItem';
 
 @Injectable()
 export class GridsterPrototypeService {

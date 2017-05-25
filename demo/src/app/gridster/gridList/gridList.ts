@@ -113,7 +113,7 @@ export class GridList {
         }
     }
 
-    resizeGrid (lanes: number) {
+    resizeGrid (lanes: number, mainView?: boolean) {
         let currentColumn = 0;
 
         this.options.lanes = lanes;
@@ -122,20 +122,30 @@ export class GridList {
         this.sortItemsByPosition();
         this.resetGrid();
 
-        // The items will be sorted based on their index within the this.items array,
-        // that is their "1d position"
-        for (let i = 0; i < this.items.length; i++) {
-            const item = this.items[i],
-                position = this.getItemPosition(item);
+        if(!mainView){
+            // The items will be sorted based on their index within the this.items array,
+            // that is their "1d position"
+            for (let i = 0; i < this.items.length; i++) {
+                const item = this.items[i],
+                    position = this.getItemPosition(item);
 
-            this.updateItemPosition(
-                item, this.findPositionForItem(item, {x: currentColumn, y: 0}));
+                this.updateItemPosition(
+                    item, this.findPositionForItem(item, {x: currentColumn, y: 0}));
 
-            // New items should never be placed to the left of previous items
-            currentColumn = Math.max(currentColumn, position.x);
+                // New items should never be placed to the left of previous items
+                currentColumn = Math.max(currentColumn, position.x);
+            }
+            this.pullItemsToLeft();
+
+        }else {
+            //If not The items will be sorted by the original position defined in their properties
+            for (let i = 0; i < this.items.length; i++) {
+                const item = this.items[i];
+
+                this.updateItemPosition(item, [item.originalY, item.originalX]);
+            }
         }
 
-        this.pullItemsToLeft();
     }
     /**
      * This method has two options for the position we want for the item:
@@ -299,7 +309,7 @@ export class GridList {
      * If a "fixed item" is provided, its position will be kept intact and the
      * rest of the items will be layed around it.
      */
-     pullItemsToLeft (fixedItem?) {
+    pullItemsToLeft (fixedItem?) {
 
         // Start a fresh grid with the fixed item already placed inside
         this.sortItemsByPosition();
@@ -404,6 +414,16 @@ export class GridList {
                     item.h = this.options.lanes;
                 } else {
                     item.w = this.options.lanes;
+                }
+            }
+
+            if (this.options.direction === 'horizontal') {
+                item.h = this.options.lanes;
+            } else {
+                if (item.originalW > this.options.lanes){
+                    item.w = this.options.lanes;
+                }else if(item.originalW){
+                    item.w = item.originalW;
                 }
             }
         }

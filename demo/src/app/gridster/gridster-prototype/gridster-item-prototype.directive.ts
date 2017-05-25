@@ -1,7 +1,6 @@
-import { Directive, ElementRef, Input, Output, HostBinding, EventEmitter, OnInit, OnDestroy,
-    NgZone} from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { ISubscription, Subscription } from 'rxjs/Subscription';
+import {Directive, ElementRef, EventEmitter, Input, NgZone, OnDestroy, OnInit, Output} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {ISubscription, Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/map';
@@ -9,7 +8,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeUntil';
 
-import { GridsterPrototypeService } from './gridster-prototype.service';
+import {GridsterPrototypeService} from './gridster-prototype.service';
 import {GridListItem} from '../gridList/GridListItem';
 import {GridsterService} from '../gridster.service';
 import {DraggableEvent} from '../utils/DraggableEvent';

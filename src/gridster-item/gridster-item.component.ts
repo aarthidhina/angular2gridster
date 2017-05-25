@@ -13,113 +13,113 @@ import {Draggable} from '../utils/draggable';
 @Component({
     selector: 'gridster-item',
     template: `<div class="gridster-item-inner">
-      <ng-content></ng-content>
-      <div class="gridster-item-resizable-handler handle-s"></div>
-      <div class="gridster-item-resizable-handler handle-e"></div>
-      <div class="gridster-item-resizable-handler handle-n"></div>
-      <div class="gridster-item-resizable-handler handle-w"></div>
-      <div class="gridster-item-resizable-handler handle-se"></div>
-      <div class="gridster-item-resizable-handler handle-ne"></div>
-      <div class="gridster-item-resizable-handler handle-sw"></div>
-      <div class="gridster-item-resizable-handler handle-nw"></div>
+        <ng-content></ng-content>
+        <div class="gridster-item-resizable-handler handle-s"></div>
+        <div class="gridster-item-resizable-handler handle-e"></div>
+        <div class="gridster-item-resizable-handler handle-n"></div>
+        <div class="gridster-item-resizable-handler handle-w"></div>
+        <div class="gridster-item-resizable-handler handle-se"></div>
+        <div class="gridster-item-resizable-handler handle-ne"></div>
+        <div class="gridster-item-resizable-handler handle-sw"></div>
+        <div class="gridster-item-resizable-handler handle-nw"></div>
     </div>`,
     styles: [`
-    :host {
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        -webkit-transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, font-size 0.2s, line-height 0.2s;
-        transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, font-size 0.2s, line-height 0.2s;
-    }
+        :host {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            -webkit-transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, font-size 0.2s, line-height 0.2s;
+            transition: top 0.2s, left 0.2s, width 0.2s, height 0.2s, font-size 0.2s, line-height 0.2s;
+        }
 
-    :host.is-dragging, :host.is-resizing {
-        -webkit-transition: none;
-        transition: none;
-        z-index: 9999;
-    }
+        :host.is-dragging, :host.is-resizing {
+            -webkit-transition: none;
+            transition: none;
+            z-index: 9999;
+        }
 
-    :host.no-transition {
-        -webkit-transition: none;
-        transition: none;
-    }
-    .gridster-item-resizable-handler {
-        position: absolute;
-        z-index: 2;
-        display: none;
-    }
+        :host.no-transition {
+            -webkit-transition: none;
+            transition: none;
+        }
+        .gridster-item-resizable-handler {
+            position: absolute;
+            z-index: 2;
+            display: none;
+        }
 
-    .gridster-item-resizable-handler.handle-n {
-      cursor: n-resize;
-      height: 10px;
-      right: 0;
-      top: 0;
-      left: 0;
-    }
+        .gridster-item-resizable-handler.handle-n {
+            cursor: n-resize;
+            height: 10px;
+            right: 0;
+            top: 0;
+            left: 0;
+        }
 
-    .gridster-item-resizable-handler.handle-e {
-      cursor: e-resize;
-      width: 10px;
-      bottom: 0;
-      right: 0;
-      top: 0;
-    }
+        .gridster-item-resizable-handler.handle-e {
+            cursor: e-resize;
+            width: 10px;
+            bottom: 0;
+            right: 0;
+            top: 0;
+        }
 
-    .gridster-item-resizable-handler.handle-s {
-      cursor: s-resize;
-      height: 10px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-    }
+        .gridster-item-resizable-handler.handle-s {
+            cursor: s-resize;
+            height: 10px;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
 
-    .gridster-item-resizable-handler.handle-w {
-      cursor: w-resize;
-      width: 10px;
-      left: 0;
-      top: 0;
-      bottom: 0;
-    }
+        .gridster-item-resizable-handler.handle-w {
+            cursor: w-resize;
+            width: 10px;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
 
-    .gridster-item-resizable-handler.handle-ne {
-      cursor: ne-resize;
-      width: 10px;
-      height: 10px;
-      right: 0;
-      top: 0;
-    }
+        .gridster-item-resizable-handler.handle-ne {
+            cursor: ne-resize;
+            width: 10px;
+            height: 10px;
+            right: 0;
+            top: 0;
+        }
 
-    .gridster-item-resizable-handler.handle-nw {
-      cursor: nw-resize;
-      width: 10px;
-      height: 10px;
-      left: 0;
-      top: 0;
-    }
+        .gridster-item-resizable-handler.handle-nw {
+            cursor: nw-resize;
+            width: 10px;
+            height: 10px;
+            left: 0;
+            top: 0;
+        }
 
-    .gridster-item-resizable-handler.handle-se {
-      cursor: se-resize;
-      width: 0;
-      height: 0;
-      right: 0;
-      bottom: 0;
-      border-style: solid;
-      border-width: 0 0 10px 10px;
-      border-color: transparent;
-    }
+        .gridster-item-resizable-handler.handle-se {
+            cursor: se-resize;
+            width: 0;
+            height: 0;
+            right: 0;
+            bottom: 0;
+            border-style: solid;
+            border-width: 0 0 10px 10px;
+            border-color: transparent;
+        }
 
-    .gridster-item-resizable-handler.handle-sw {
-      cursor: sw-resize;
-      width: 10px;
-      height: 10px;
-      left: 0;
-      bottom: 0;
-    }
+        .gridster-item-resizable-handler.handle-sw {
+            cursor: sw-resize;
+            width: 10px;
+            height: 10px;
+            left: 0;
+            bottom: 0;
+        }
 
-    :host(:hover) .gridster-item-resizable-handler.handle-se {
-      border-color: transparent transparent #ccc
-    }
+        :host(:hover) .gridster-item-resizable-handler.handle-se {
+            border-color: transparent transparent #ccc
+        }
     `],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -196,26 +196,32 @@ export class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, 
         } else {
             this.gridster.disabledItems.push(this.item);
         }
+
+        this.item.saveOriginalProperties();
     }
 
     ngOnChanges(changes: SimpleChanges) {
         if (!this.gridster.gridList) {
             return;
         }
-        if (changes['dragAndDrop']) {
-            if (changes['dragAndDrop'].currentValue) {
-                this.enableDragDrop();
-            } else {
-                this.disableDraggable();
-            }
-        }
-        if (changes['resizable']) {
-            if (changes['resizable'].currentValue) {
-                this.enableResizable();
-            } else {
-                this.disableResizable();
-            }
-        }
+
+        //if (changes['dragAndDrop']) {
+        //    if (changes['dragAndDrop'].currentValue) {
+        //        this.enableDragDrop();
+        //    } else {
+        //        this.disableDraggable();
+        //    }
+        //}
+        //if (changes['resizable']) {
+        //    if (changes['resizable'].currentValue) {
+        //        this.enableResizable();
+        //    } else {
+        //        this.disableResizable();
+        //    }
+        //}
+
+        //saves modifications when dragging and dropping items
+        this.item.saveOriginalProperties();
 
         this.gridster.gridList.resolveCollisions(this.item);
         this.gridster.render();
@@ -246,6 +252,7 @@ export class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, 
             this.gridster.reflow();
         }
 
+        // if (this.gridster.options.dragAndDrop) {
         if (this.gridster.options.dragAndDrop && this.item.dragAndDrop) {
             this.enableDragDrop();
         }
@@ -393,17 +400,17 @@ export class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, 
             maxW: Math.min(
                 this.gridster.options.maxWidth,
                 (this.gridster.options.direction === 'vertical' && direction.indexOf('w') < 0) ?
-                this.gridster.options.lanes - this.item.x : this.gridster.options.maxWidth,
+                    this.gridster.options.lanes - this.item.x : this.gridster.options.maxWidth,
                 direction.indexOf('w') >= 0 ?
-                this.item.x + this.item.w : this.gridster.options.maxWidth
+                    this.item.x + this.item.w : this.gridster.options.maxWidth
             ),
             minH: this.gridster.options.minHeight,
             maxH: Math.min(
                 this.gridster.options.maxHeight,
                 (this.gridster.options.direction === 'horizontal' && direction.indexOf('n') < 0) ?
-                this.gridster.options.lanes - this.item.y : this.gridster.options.maxHeight,
+                    this.gridster.options.lanes - this.item.y : this.gridster.options.maxHeight,
                 direction.indexOf('n') >= 0 ?
-                this.item.y + this.item.h : this.gridster.options.maxHeight
+                    this.item.y + this.item.h : this.gridster.options.maxHeight
             ),
             scrollLeft,
             scrollTop

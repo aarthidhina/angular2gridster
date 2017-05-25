@@ -11,13 +11,37 @@ import { IGridsterDraggableOptions } from './gridster/IGridsterDraggableOptions'
 export class AppComponent {
   @ViewChild(GridsterComponent) gridster: GridsterComponent;
   gridsterOptions: IGridsterOptions = {
-    lanes: 5,
+    lanes: 8,
     direction: 'vertical',
-    dragAndDrop: true,
     resizable: true,
-    maxWidth: 3,
+    widthHeightRatio: 1,
+    dragAndDrop: true,
     maxHeight: 3,
-    widthHeightRatio: 1
+    responsiveOptions: [
+      {
+        minWindowWidth: 0,    //Default options values
+        lanes: 4,
+        dragAndDrop: false,
+        maxWidth: 1,
+        mainView: false
+      },
+      {
+        minWindowWidth: 300,
+        lanes: 2,
+        maxWidth: 2
+      },
+      {
+        minWindowWidth: 900,
+        lanes: 4,
+        maxWidth: 4
+      },
+      {
+        minWindowWidth: 1200,
+        lanes: 8,
+        maxWidth: 8,
+        dragAndDrop:true,
+        mainView: false
+      }]
   };
   gridsterDraggableOptions: IGridsterDraggableOptions = {
     handlerClass: 'panel-heading'
