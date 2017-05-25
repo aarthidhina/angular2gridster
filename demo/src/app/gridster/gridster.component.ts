@@ -134,6 +134,9 @@ export class GridsterComponent implements OnInit, AfterViewInit, OnDestroy {
         if (name === 'direction') {
             this.gridster.options.direction = value;
         }
+        if (name === 'widthHeightRatio') {
+            this.gridster.options.widthHeightRatio = parseFloat(value || 1);
+        }
         this.gridster.gridList.setOption(name, value);
 
         return this;
@@ -200,47 +203,6 @@ export class GridsterComponent implements OnInit, AfterViewInit, OnDestroy {
             });
 
         dropOverObservable.connect();
-    }
-
-    /**
-     * Change gridster config option and rebuild
-     * @param {string} name
-     * @param {any} value
-     * @return {GridsterComponent}
-     */
-    setOption(name: string, value: any) {
-        if (name === 'dragAndDrop') {
-            if (value) {
-                this.enableDraggable();
-            } else {
-                this.disableDraggable();
-            }
-        }
-        if (name === 'resizable') {
-            if (value) {
-                this.enableResizable();
-            } else {
-                this.disableResizable();
-            }
-        }
-        if (name === 'lanes') {
-            this.gridster.options.lanes = value;
-        }
-        if (name === 'direction') {
-            this.gridster.options.direction = value;
-        }
-        if (name === 'widthHeightRatio') {
-            this.gridster.options.widthHeightRatio = parseFloat(value || 1);
-        }
-        this.gridster.gridList.setOption(name, value);
-
-        return this;
-    }
-
-    reload() {
-        this.gridster.reflow();
-
-        return this;
     }
 
     private enableDraggable() {
